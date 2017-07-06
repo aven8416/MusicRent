@@ -15,41 +15,22 @@
 
                             <div class="carousel-inner">
                                 <div class="item active">
-                                    <div class="col-sm-6">
-                                        <h1><span>E</span>-SHOPPER</h1>
-                                        <h2>Free E-Commerce Template</h2>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                                        <button type="button" class="btn btn-default get">Get it now</button>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <img src="{{asset('theme/images/home/girl1.jpg')}}" class="girl img-responsive" alt="" />
-                                        <img src="{{asset('theme/images/home/pricing.png')}}"  class="pricing" alt="" />
-                                    </div>
+                                    <img src="images/home/guitar_a.jpg"  class="girl img-responsive" alt="" />
                                 </div>
                                 <div class="item">
-                                    <div class="col-sm-6">
-                                        <h1><span>E</span>-SHOPPER</h1>
-                                        <h2>100% Responsive Design</h2>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                                        <button type="button" class="btn btn-default get">Get it now</button>
-                                    </div>
-                                    <div class="col-sm-6">
-                                       <img src="{{asset('theme/images/home/girl1.jpg')}}" class="girl img-responsive" alt="" />
-                                        <img src="{{asset('theme/images/home/pricing.png')}}"   class="pricing" alt="" />
-                                    </div>
+                                    <img src="images/home/acoustic.jpg"  class="girl img-responsive" alt="" />
                                 </div>
 
                                 <div class="item">
-                                    <div class="col-sm-6">
-                                        <h1><span>E</span>-SHOPPER</h1>
-                                        <h2>Free Ecommerce Template</h2>
+                                 {{--   <div class="col-sm-6">
+                                        <h1><span>Music</span> RENT</h1>
+                                        <h2>Rental Products</h2>
                                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
                                         <button type="button" class="btn btn-default get">Get it now</button>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <img src="images/home/girl3.jpg" class="girl img-responsive" alt="" />
-                                        <img src="images/home/pricing.png" class="pricing" alt="" />
-                                    </div>
+                                    </div>--}}
+
+                                        <img src="images/home/cello2.jpg"  class="girl img-responsive" alt="" />
+
                                 </div>
 
                             </div>
@@ -71,7 +52,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm-3">
-                        <div class="left-sidebar">
+                       {{-- <div class="left-sidebar">
                             <h2>Category</h2>
                             <div class="panel-group category-products" id="accordian"><!--category-productsr-->
                                 <div class="panel panel-default">
@@ -210,17 +191,24 @@
                                                style="border:0px; font-weight: bold; color:green" readonly="readonly"/></b> 
                                    </div> 
 
-                            </div><!--/price-range-->
+                            </div><!--/price-range-->--}}
 
                             <div class="shipping text-center"><!--shipping-->
                                 <img src="images/home/shipping.jpg" alt="" />
                             </div><!--/shipping-->
 
                         </div>
+                    <div class="col-sm-9 padding-right">
+                        <div class="recommended_items"><!--recommended_items-->
+                            <h2 class="title text-center">recommended items</h2>
+                            @include('front.recommends')
+                        </div><!--/recommended_items-->
+                        </div>
+
                     </div>
 
                     <div class="col-sm-9 padding-right">
-                        <div class="features_items"><!--features_items-->
+                      {{--  <div class="features_items"><!--features_items-->
                             <h2 class="title text-center">Features Items</h2>
                             <div class="col-sm-4">
                                 <div class="product-image-wrapper">
@@ -376,8 +364,8 @@
                             </div>
 
                         </div><!--features_items-->
-
-                        <div class="category-tab"><!--category-tab-->
+--}}
+                       {{-- <div class="category-tab"><!--category-tab-->
                             <div class="col-sm-12">
                                 <ul class="nav nav-tabs">
                                     <li class="active"><a href="#tshirt" data-toggle="tab">T-Shirt</a></li>
@@ -663,12 +651,12 @@
                                     </div>
                                 </div>
                             </div>
-                        </div><!--/category-tab-->
+                        </div><!--/category-tab-->--}}
 
-                        <div class="recommended_items"><!--recommended_items-->
+                  {{--      <div class="recommended_items"><!--recommended_items-->
                             <h2 class="title text-center">recommended items</h2>
 @include('front.recommends')
-                        </div><!--/recommended_items-->
+                        </div><!--/recommended_items-->--}}
 
                     </div>
                 </div>

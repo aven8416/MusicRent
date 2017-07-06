@@ -57,24 +57,36 @@ var proDum = $('#proDum').val();
             <div class="col-sm-3">
                 <div class="left-sidebar">
 
+
+                    <div class="brands_products"><!--cat_products-->
+                        <h2>Category</h2>
+                        <div class="brands-name">
+                            <ul class="nav nav-pills nav-stacked">
+                                <?php $cats = DB::table('pro_cat')->orderby('name', 'ASC')->get();?>
+
+                                @foreach($cats as $cat)
+                                    <li><a href="{{url('/')}}/products/{{$cat->name}}"> <span class="pull-right">({{App\products::where('cat_id',$cat->id)->count()}})</span> {{ucwords($cat->name)}}</a></li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div><!--/cat_products-->
+
                     <div class="brands_products"><!--brands_products-->
                         <h2>Brands</h2>
                         <div class="brands-name">
                             <ul class="nav nav-pills nav-stacked">
-                                <li><a href=""> <span class="pull-right">(50)</span>Acne</a></li>
-                                <li><a href=""> <span class="pull-right">(56)</span>Grüne Erde</a></li>
-                                <li><a href=""> <span class="pull-right">(27)</span>Albiro</a></li>
-                                <li><a href=""> <span class="pull-right">(32)</span>Ronhill</a></li>
-                                <li><a href=""> <span class="pull-right">(5)</span>Oddmolly</a></li>
-                                <li><a href=""> <span class="pull-right">(9)</span>Boudestijn</a></li>
-                                <li><a href=""> <span class="pull-right">(4)</span>Rösch creative culture</a></li>
+                                <?php $brands = DB::table('pro_brand')->orderby('name', 'ASC')->get();?>
+
+                                @foreach($brands as $brand)
+                                        <li><a href="{{url('/')}}/products/brand/{{$brand->name}}"> <span class="pull-right">({{App\products::where('brand_id',$brand->id)->count()}})</span> {{ucwords($brand->name)}}</a></li>
+                                @endforeach
                             </ul>
                         </div>
                     </div><!--/brands_products-->
 
 
                     <div class="shipping text-center"><!--shipping-->
-                        <img src="{{Config::get('app.url')}}/theme/images/home/shipping.jpg" alt="" />
+                        <img src="/images/home/shipping.jpg" alt="" />
                     </div><!--/shipping-->
 
                 </div>
@@ -84,7 +96,7 @@ var proDum = $('#proDum').val();
                 <div class="product-details"><!--product-details-->
                     <div class="col-sm-5">
                         <div class="view-product">
-                            <img src="<?php echo $value->pro_img; ?>" alt="" />
+                            <img src="/upload/images/<?php echo $value->pro_img; ?>" alt="" />
                             <h3>ZOOM</h3>
                         </div>
 
@@ -94,11 +106,12 @@ var proDum = $('#proDum').val();
                         <div class="product-information"><!--/product-information-->
 
                           @if($value->new_arrival==1)
-                            <img src="{{Config::get('app.url')}}theme/images/product-details/new.jpg"
+                            <img src="/images/product-details/new.jpg"
                               class="newarrival" alt="" />
                             @endif
                             <h2><?php echo ucwords($value->pro_name); ?></h2>
-                            <p>Web Code: <?php echo $value->pro_code; ?></p>
+                            <p>Brand: <?php echo ucwords($value->name); ?></p>
+                            <p>Vendor Code: <?php echo $value->pro_code; ?></p>
                               <form action="{{url('/cart/addItem')}}/<?php echo $value->id; ?>">
                               <span>
                                   <span id="price">
@@ -115,9 +128,12 @@ var proDum = $('#proDum').val();
                                       @endif
 
                                   </span>
-                                  <label>Quantity:</label>
+                                  <label>Amount of days:</label>
                                     <input type="number" size="2" value="1" id="qty"  autocomplete="off"
-                                     style="text-align:center; max-width:50px;" MIN="1" MAX="30">
+                                     style="text-align:center; max-width:50px;" MIN="1" MAX="90">
+
+
+                                  @if($value->stock ==1)
                                      <button class="btn btn-fefault cart" id="addToCart_default">
                                          <i class="fa fa-shopping-cart"></i>
                                          Add to cart
@@ -127,8 +143,15 @@ var proDum = $('#proDum').val();
                                           Add to cart
                                       </button>
                                     <input type="hidden" value="<?php echo $value->id; ?>" id="proDum"/>
+                                      @endif
                               </span>
-                            <p><b>Availability:</b> <?php echo $value->stock; ?> In Stock</p>
+                           @if($value->stock ==1)
+                                  <p><b>Availability:</b> In Stock</p>
+                                @else
+                                      <p><b>Availability:</b> Reserved</p>
+                               @endif
+
+
 
                             <?php $sizes = DB::table('products_properties')
                             ->select('size')
@@ -173,7 +196,7 @@ var proDum = $('#proDum').val();
                                 <h2 align="Center">Alternative Images</h2>
                                 @foreach($altImgs as $altImg)
                                 <div class="col-md-2" style="margin:5px">
-                                  <img src="{{Config::get('app.url')}}/public/img/alt_images/{{$altImg->alt_img}}"
+                                  <img src="/img/alt_images/{{$altImg->alt_img}}"
                                   style="width:80px; height:80px;"/>
                                 </div>
                                 @endforeach
@@ -188,7 +211,6 @@ var proDum = $('#proDum').val();
                     <div class="col-sm-12">
                         <ul class="nav nav-tabs">
                             <li class="active"><a href="#details" data-toggle="tab">Details</a></li>
-                            <li><a href="#tag" data-toggle="tab">Tag</a></li>
                             <li ><a href="#reviews" data-toggle="tab">Reviews ({{$count_reviews}})</a></li>
                         </ul>
                     </div>
@@ -197,9 +219,6 @@ var proDum = $('#proDum').val();
                           <p>{{ $value->pro_info}}</p>
                         </div>
 
-                        <div class="tab-pane fade" id="tag" >
-                          <li>tag1</li>   <li>tag2</li>
-                        </div>
 
                         <div class="tab-pane fade " id="reviews" >
                             <div class="col-sm-12">

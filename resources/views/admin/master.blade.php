@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>EasyShop (Admin) </title>
+    <title>MusicRent (Admin) </title>
     <meta charset="utf-8">
     <link href="{{asset('admin_theme/css/bootstrap.min.css')}}" rel="stylesheet">
     <!-- bootstrap theme -->
@@ -15,6 +15,9 @@
   	<link href="{{asset('admin_theme/css/widgets.css')}}" rel="stylesheet">
       <link href="{{asset('admin_theme/css/style.css')}}" rel="stylesheet">
       <link href="{{asset('admin_theme/css/style-responsive.css')}}" rel="stylesheet" />
+
+   {{--   <script src="{{asset('admin_themejs/jquery-1.11.1.min.js')}}"></script>--}}
+      <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
 <style>
 #main-content{min-height: 550px}
@@ -30,7 +33,7 @@
          <div class="container">
 
             <div class="copy text-center">
-               Copyright 2017 <a href='#'>EasyShop</a>
+               Copyright 2017 <a href='#'>MusicRent</a>
             </div>
 
          </div>

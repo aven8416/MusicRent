@@ -47,12 +47,16 @@ $(document).ready(function(){
                                 <th>Image</th>
                                 <th>Catgeory</th>
                                 <th>Product ID</th>
+                                 <th>Status</th>
+                              <th>Product Period</th>
                                 <th>Product Name</th>
                                 <th>Product Code</th>
                                 <th>Product Price</th>
                                 <th>Alt Images</th>
                                 <th>On Sale</th>
-                                <th>update</th>
+                                <th>Update</th>
+                              <th>Delete</th>
+                              <th>Return</th>
                             </tr>
                         </thead>
                         <?php $count =1;?>
@@ -60,10 +64,20 @@ $(document).ready(function(){
 
                         <tbody>
                             <tr>
-                                <td> <img src="<?php echo $product->pro_img; ?>" alt=""
+                                <td> <img src="/upload/images/<?php echo $product->pro_img; ?>" alt=""
                                    width="50px" height="50px"/></td>
                                 <td>{{ucwords($product->name)}}</td>
                                 <td>{{$product->id}}</td>
+                                @if($product->stock)
+                                    <td ><p style="background-color: #26da1b ; color: #FFFFFF;padding-left: 5px">In stock</p></td>
+                                @else
+                                    <td><p style="background-color: #fb6965 ; color: #FFFFFF;padding-left: 5px">Reserved</p></td>
+                                @endif
+                                @if($product->start_date == null && $product->end_date == null)
+                                    <td>No period</td>
+                                @else
+                                    <td>{{date('F j, Y', strtotime($product->start_date))}}<br>{{  date('F j, Y', strtotime($product->end_date))}}</td>
+                                @endif
                                 <td>{{$product->pro_name}}</td>
                                 <td>{{$product->pro_code}}</td>
                                 <td>{{$product->pro_price}}</td>
@@ -96,6 +110,14 @@ $(document).ready(function(){
 
                                 <td><a href="{{url('/')}}/admin/ProductEditForm/{{$product->id}}"
                                    class="btn btn-success btn-small">Edit</a></td>
+
+                                <td><a href="{{url('/')}}/admin/deleteProduct/{{$product->id}}"
+                                       class="btn btn-danger btn-small">Delete</a></td>
+                                <td>
+                                    <a href="{{url('/')}}/admin/orders/product_returned/{{$product->id}}/"
+                                       class="btn btn-info btn-small">Returned</a>
+
+                                </td>
                             </tr>
                         </tbody>
                         <?php $count++;?>

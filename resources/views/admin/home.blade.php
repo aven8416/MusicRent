@@ -11,21 +11,29 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="content-box-large">
+                        {!! Form::open(['url' => 'admin/add_product',  'method' => 'post', 'enctype' => 'multipart/form-data']) !!}
                         <div class="panel-heading">
                             <div class="panel-title">Add New Product
                                 <input type="submit" value="Submit" class="btn btn-primary pull-right" style="margin:-5px">
                             </div>
-                              {!! Form::open(['url' => 'admin/add_product',  'method' => 'post', 'enctype' => 'multipart/form-data']) !!}
+
 
 
 
 
                         </div>
                         <div class="panel-body">
+                            Category:
                             <Select class="form-control" name="cat_id">
                             @foreach($cat_data as $cat)
-                            Category:  <option value="{{ $cat->id }}">{{ ucwords($cat->name) }}</option>
+                             <option value="{{ $cat->id }}">{{ ucwords($cat->name) }}</option>
                             @endforeach
+                            </select>
+                            <br>
+                            Brand:
+                            <Select class="form-control" name="brand_id">
+                                @foreach($brand_data as $brand)<option value="{{ $brand->id }}">{{ ucwords($brand->name) }}</option>
+                                @endforeach
                             </select>
                             <br>
 

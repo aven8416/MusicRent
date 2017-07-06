@@ -39,7 +39,7 @@
                             <br/>
                             Details:  <textarea name="pro_info" class="form-control" rows="2">{{$product->pro_info}}</textarea>
                             <br/>
-                            New Arrival: <p class="pull-right"><input type="checkbox" name="new_arrival" value="1">
+                            New Arrival: <p class="pull-right"><input type="checkbox" checked="checked" name="new_arrival" value="{{$product->new_arrival}}">
 
 
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -103,16 +103,39 @@
                             Update Product Image
                           </div>
                         </div>
+                           <hr>
 
-                               <img src="<?php echo $product->pro_img; ?>"
+                               <img src="/upload/images/<?php echo $product->pro_img; ?>"
                                alt="" class="img-rounded" width="150px" height="150px"/>
                                    <br> <br>
                                 <p><a href="{{url('/admin/EditImage')}}/{{$product->id}}"
                                    class="btn btn-info">Change Image</a>
                                 </p>
                         </div>
+                     <hr>
 
-          </section>
+                     <div class="content-box-large " align="center">
+                         <div class="panel-heading">
+                             <div class="panel-title">
+                                 Set start date
+                             </div>
+                         </div>
+                         <hr>
+
+                         {!! Form::open(['url' => 'admin/orders/product_date/'.$product->id,  'method' => 'post']) !!}
+
+                             <input  type="date" placeholder="Start date" size="5"   onchange="" name="start_date" id="start_date"  class="form-control ">
+
+                                <hr>
+
+                             <input  type="text" placeholder="qty" size="2"  onchange="" name="qty_days" id="qty_days"  class="form-control">
+
+                         <br> <br>
+                             <input type="submit" class="btn btn-info btn-small" value="Set date" />
+                         {!! Form::close() !!}
+                     </div>
+
+            </section>
         </section>
 </section>
 

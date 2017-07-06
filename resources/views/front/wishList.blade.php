@@ -5,7 +5,7 @@
 
 <section id="advertisement">
     <div class="container">
-        <img src="{{asset('theme/images/shop/advertisement.jpg')}}" alt="" />
+        <img src="{{asset('client/images/shop/advertisement.jpg')}}" alt="" />
     </div>
 </section>
 
@@ -168,7 +168,7 @@
                                 <div class="single-products">
                                     <div class="productinfo text-center">
                                         <a href="{{url('/product_details')}}">
-                                            <img src="<?php echo $product->pro_img; ?>" alt="" />
+                                            <img src="/upload/images/<?php echo $product->pro_img; ?>" alt="" />
                                         </a>
                                         <h2>$<?php echo $product->pro_price; ?></h2>
 
@@ -198,7 +198,7 @@
 
                 </div>
                 <ul class="pagination">
-                    {{ $Products}}
+
                 </ul>
             </div><!--features_items-->
         </div>

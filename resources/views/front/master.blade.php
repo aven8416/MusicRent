@@ -5,25 +5,50 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
-        <title>Home | E-Shopper</title>
-        <link href="{{asset('theme/css/bootstrap.min.css')}}" rel="stylesheet">
-        <link href="{{asset('theme/css/font-awesome.min.css')}}" rel="stylesheet">
-        <link href="{{asset('theme/css/prettyPhoto.css')}}" rel="stylesheet">
-        <link href="{{asset('theme/css/price-range.css')}}" rel="stylesheet">
-        <link href="{{asset('theme/css/animate.css')}}" rel="stylesheet">
-        <link href="{{asset('theme/css/main.css')}}" rel="stylesheet">
-        <link href="{{asset('theme/css/responsive.css')}}" rel="stylesheet">
-          <link href="{{asset('theme/css/jquery-ui.css')}}" rel="stylesheet">
-        <!--[if lt IE         9]>
-            <script src="js/html5shiv.js"></script>
-            <script src="js/respond.min.js"></script>
-            <![endif]-->
-        <link rel="shortcut icon" href="{{asset('theme/images/ico/favicon.ico')}}">
-        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{url('../')}}/theme/images/ico/apple-touch-icon-144-precomposed.png">
-        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{url('../')}}/theme/images/ico/apple-touch-icon-114-precomposed.png">
-        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{url('../')}}/theme/images/ico/apple-touch-icon-72-precomposed.png">
-        <link rel="apple-touch-icon-precomposed" href="{{url('../')}}/theme/images/ico/apple-touch-icon-57-precomposed.png">
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <title>Home | MusicRent</title>
+        <link href="{{asset('client/css/bootstrap.min.css')}}" rel="stylesheet">
+        <link href="{{asset('client/css/font-awesome.min.css')}}" rel="stylesheet">
+        <link href="{{asset('client/css/prettyPhoto.css')}}" rel="stylesheet">
+        <link href="{{asset('client/css/price-range.css')}}" rel="stylesheet">
+        <link href="{{asset('client/css/animate.css')}}" rel="stylesheet">
+        <link href="{{asset('client/css/main.css')}}" rel="stylesheet">
+        <link href="{{asset('client/css/responsive.css')}}" rel="stylesheet">
+          <link href="{{asset('client/css/jquery-ui.css')}}" rel="stylesheet">
+
+
+        <link href="{{asset('client/css/bootstrap-datetimepicker.min.css')}}" rel="stylesheet">
+        <link href="{{asset('client/css/bootstrap-datetimepicker.css')}}" rel="stylesheet">
+
+        <script src="{{asset('client/js/jquery-1.11.1.min.js')}}"></script>
+        <script src="{{asset('client/js/moment-with-locales.min.js')}}"></script>
+        <script src="{{asset('client/js/moment.js')}}"></script>
+        <script src="{{asset('client/js/bootstrap.min.js')}}"></script>
+        <script src="{{asset('client/js/bootstrap-datetimepicker.min.js')}}"></script>
+
+        <script src="{{asset('client/js/html5shiv.js')}}"></script>
+        <script src="{{asset('client/js/respond.min.js')}}"></script>
+
+        <script src="{{asset('client/js/bootstrap.js')}}"></script>
+
+        {{--<script src="{{asset('client/js/jquery.js')}}"></script>--}}
+
+       {{-- <script src="{{asset('client/js/jquery.flexslider-min.js')}}"></script>
+        <script src="{{asset('client/js/contact.js')}}"></script>
+        <script src="{{asset('client/js/selectordie.min.js')}}"></script>--}}
+
+
+
+
+
+
+
+
+        <link rel="shortcut icon" href="{{asset('client/images/ico/favicon.ico')}}">
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{url('../')}}/images/ico/apple-touch-icon-144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{url('../')}}/images/ico/apple-touch-icon-114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{url('../')}}/images/ico/apple-touch-icon-72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="{{url('../')}}/images/ico/apple-touch-icon-57-precomposed.png">
+ {{-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script>--}}
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <style>
@@ -40,7 +65,7 @@
 
 <script>
 
-    $(function () {
+        $(function () {
         $("#slider-range").slider({
             range: true,
             min: 0,
@@ -91,6 +116,34 @@
                 });
 
         });
+
+        $('.tryCat').click(function(){
+
+            //alert('hardeep');
+
+            var cat = [];
+            $('.tryCat').each(function(){
+                if($(this).is(":checked")){
+
+                    cat.push($(this).val());
+                }
+            });
+            Finalcat  = cat.toString();
+
+            $.ajax({
+                type: 'get',
+                dataType: 'html',
+                url: '',
+                data: "cat=" + Finalcat,
+                success: function (response) {
+                    console.log(response);
+                    $('#updateDiv').html(response);
+                }
+            });
+
+        });
+
+
        });
 
       <?php $pros = DB::table('products')->get();?>
@@ -117,6 +170,21 @@
       });
 </script>
 
+
+            <script type="text/javascript">
+                    $(function () {
+                        $('#birth').datetimepicker(
+                                {pickTime: false, language: 'en', format: 'DD.MM.YYYY'}
+                        );
+                        $('#drop-off-date').datetimepicker(
+                                {pickTime: false, language: 'en', format: 'DD.MM.YYYY'}
+                        );
+                      /*  $('#birth').datetimepicker(
+                                {pickTime: false, language: 'en'}
+                        );*/
+                    });
+        </script>
+
     </head><!--/head-->
 
     <body>
@@ -128,32 +196,9 @@
                     <div class="row">
                         <div class="col-sm-4">
                             <div class="logo pull-left">
-                                <a href="{{url('/')}}"><img src="{{url('../')}}/theme/images/home/logo.png" alt="" /></a>
+                                <a href="{{url('/')}}"><img src="{{url('../')}}/images/home/logo3.png" alt="" /></a>
                             </div>
-                            <div class="btn-group pull-right">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-default dropdown-toggle usa" data-toggle="dropdown">
-                                        USA
-                                        <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">Canada</a></li>
-                                        <li><a href="#">UK</a></li>
-                                    </ul>
-                                </div>
 
-                                <div class="btn-group">
-
-                                    <button type="button" class="btn btn-default dropdown-toggle usa" data-toggle="dropdown">
-                                        DOLLAR
-                                        <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">Canadian Dollar</a></li>
-                                        <li><a href="#">Pound</a></li>
-                                    </ul>
-                                </div>
-                            </div>
                         </div>
                         <div class="col-sm-8">
                             <div class="shop-menu pull-right">
@@ -162,7 +207,7 @@
                                         <li><a href="{{url('/')}}/profile"><i class="fa fa-user"></i>{{ucwords(Auth::user()->name)}}</a></li>
                                     <?php } ?>
                                     <li><a href="{{url('/WishList')}}"><i class="fa fa-star"></i> Wishlist <span style="color:green; font-weight: bold">({{App\wishList::count()}})</span> </a></li>
-                                    <li><a href="{{url('/checkout')}}"><i class="fa fa-crosshairs"></i> Checkout</a></li>
+                                  {{--  <li><a href="{{url('/checkout')}}"><i class="fa fa-crosshairs"></i> Checkout</a></li>--}}
 
                                    <?php
                                    /*<li><a href="{{url('/cart')}}"><i class="fa fa-shopping-cart"></i>
@@ -193,7 +238,7 @@
                                                     <div class="col-md-12" style="padding:5px">
 
                                                         <div class="col-sm-5">
-                                                            <img src="{{$cartD->options->img}}" style="width:80%"/>
+                                                            <img src="/upload/images/{{$cartD->options->img}}" style="width:80%"/>
                                                         </div>
                                                         <div class="col-sm-7">
                                                             <h4 style="margin:0px;">{{$cartD->name}}</h4>
@@ -235,7 +280,7 @@
         @yield('content')
 
         <footer id="footer"><!--Footer-->
-            <div class="footer-top">
+          {{--  <div class="footer-top">
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-2">
@@ -249,7 +294,7 @@
                                 <div class="video-gallery text-center">
                                     <a href="#">
                                         <div class="iframe-img">
-                                            <img src="{{url('../')}}/theme/images/home/iframe1.png" alt="" />
+                                            <img src="{{url('../')}}/images/home/iframe1.png" alt="" />
                                         </div>
                                         <div class="overlay-icon">
                                             <i class="fa fa-play-circle-o"></i>
@@ -264,7 +309,7 @@
                                 <div class="video-gallery text-center">
                                     <a href="#">
                                         <div class="iframe-img">
-                                            <img src="{{url('../')}}/theme/images/home/iframe2.png" alt="" />
+                                            <img src="{{url('../')}}/images/home/iframe2.png" alt="" />
                                         </div>
                                         <div class="overlay-icon">
                                             <i class="fa fa-play-circle-o"></i>
@@ -279,7 +324,7 @@
                                 <div class="video-gallery text-center">
                                     <a href="#">
                                         <div class="iframe-img">
-                                            <img src="{{url('../')}}/theme/images/home/iframe3.png" alt="" />
+                                            <img src="{{url('../')}}/images/home/iframe3.png" alt="" />
                                         </div>
                                         <div class="overlay-icon">
                                             <i class="fa fa-play-circle-o"></i>
@@ -294,7 +339,7 @@
                                 <div class="video-gallery text-center">
                                     <a href="#">
                                         <div class="iframe-img">
-                                            <img src="{{url('../')}}/theme/images/home/iframe4.png" alt="" />
+                                            <img src="{{url('../')}}/images/home/iframe4.png" alt="" />
                                         </div>
                                         <div class="overlay-icon">
                                             <i class="fa fa-play-circle-o"></i>
@@ -307,13 +352,13 @@
                         </div>
                         <div class="col-sm-3">
                             <div class="address">
-                                <img src="{{url('../')}}/theme/images/home/map.png" alt="" />
+                                <img src="{{url('../')}}/images/home/map.png" alt="" />
                                 <p>505 S Atlantic Ave Virginia Beach, VA(Virginia)</p>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>--}}
 
             <div class="footer-widget">
                 <div class="container">
@@ -332,13 +377,13 @@
                         </div>
                         <div class="col-sm-2">
                             <div class="single-widget">
-                                <h2>Quock Shop</h2>
+                                <h2>Quick Rent</h2>
                                 <ul class="nav nav-pills nav-stacked">
-                                    <li><a href="#">T-Shirt</a></li>
-                                    <li><a href="#">Mens</a></li>
-                                    <li><a href="#">Womens</a></li>
+                                    <li><a href="#">Rock stars instrument</a></li>
+                                    <li><a href="#">Guitars</a></li>
+                                    <li><a href="#">Acoustic</a></li>
                                     <li><a href="#">Gift Cards</a></li>
-                                    <li><a href="#">Shoes</a></li>
+                                    <li><a href="#">Trombone</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -356,7 +401,7 @@
                         </div>
                         <div class="col-sm-2">
                             <div class="single-widget">
-                                <h2>About Shopper</h2>
+                                <h2>About Service</h2>
                                 <ul class="nav nav-pills nav-stacked">
                                     <li><a href="#">Company Information</a></li>
                                     <li><a href="#">Careers</a></li>
@@ -368,7 +413,7 @@
                         </div>
                         <div class="col-sm-3 col-sm-offset-1">
                             <div class="single-widget">
-                                <h2>About Shopper</h2>
+                                <h2>About Renter</h2>
 
                                 <form action="#" class="searchform">
                                     <input type="text" placeholder="Your email address" />
@@ -385,14 +430,13 @@
             <div class="footer-bottom">
                 <div class="container">
                     <div class="row">
-                        <p class="pull-left">Copyright © 2013 E-SHOPPER Inc. All rights reserved.</p>
-                        <p class="pull-right">Designed by <span><a target="_blank" href="http://www.themeum.com">Themeum</a></span></p>
+                        <p class="pull-left">Copyright © 2017 MusicRent All rights reserved.</p>
                     </div>
                 </div>
             </div>
 
         </footer><!--/Footer-->
 
-<script src="{{asset('theme/js/bootstrap.min.js')}}"></script>
+<script src="{{asset('client/js/bootstrap.min.js')}}"></script>
     </body>
 </html>

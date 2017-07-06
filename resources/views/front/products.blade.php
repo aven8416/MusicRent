@@ -16,19 +16,48 @@
                                 <div class="single-products">
                                     <div class="productinfo text-center">
                                         <a href="{{url('/product_details')}}">
-                                            <img src="<?php echo $product->pro_img; ?>" alt="" />
+                                            <img src="/upload/images/<?php echo $product->pro_img; ?>" alt="" />
                                         </a>
-                                        <h2 id="price">$<?php echo $product->pro_price; ?></h2>
+                                        <h2 id="price">
+                                            @if($product->spl_price==0)
+                                                ${{$product->pro_price}}
+                                            @else
+                                                <span style="text-decoration:line-through; color:#ddd">
+                                           ${{$product->pro_price}} </span>
+                                                ${{$product->spl_price}}
+                                            @endif<p style="font-size: 14px; color:#696763">per day</p>
 
-                                        <p><a href="{{url('/product_details')}}"><?php echo $product->pro_name; ?></a></p>
-                                        <a href="{{url('/cart/addItem')}}/<?php echo $product->id; ?>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                        </h2>
+                                        <?php $brand = DB::table('pro_brand')->where('id',$product->brand_id)->get()->first();?>
+                                        <p><a href="{{url('/product_details')}}"><?php echo ucwords($brand->name)?>  <?php echo  $product->pro_name; ?></a></p>
+                                        @if($product->stock == 1)
+                                            <a href="{{url('/cart/addItem')}}/<?php echo $product->id; ?>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                        @else
+                                            <h2 style="color:red">Reserved</h2>
+                                        @endif
                                     </div>
                                     <a href="{{url('/product_details')}}/<?php echo $product->id; ?>">
                                         <div class="product-overlay">
                                             <div class="overlay-content">
-                                                <h2>$<?php echo $product->pro_price; ?></h2>
-                                                <p><?php echo $product->pro_name; ?></p>
-                                                <a href="{{url('/cart/addItem')}}/<?php echo $product->id; ?>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                <h2>
+                                                    @if($product->spl_price==0)
+                                                        ${{$product->pro_price}}
+                                                    @else
+                                                        <img src="images/shop/on-sale.png" style="width:60px"/>
+                                                        <span style="text-decoration:line-through; color:#ddd">
+                                                   ${{$product->pro_price}} </span>
+                                                        ${{$product->spl_price}}
+                                                    @endif
+                                                    <p style="font-size: 14px; color:#fff">per day</p>
+                                                </h2>
+                                                <?php $brand = DB::table('pro_brand')->where('id',$product->brand_id)->get()->first();?>
+                                                <p><?php echo ucwords($brand->name)?> <?php echo $product->pro_name; ?></p>
+
+                                                @if($product->stock == 1)
+                                                    <a href="{{url('/cart/addItem')}}/<?php echo $product->id; ?>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                @else
+                                                    <h2 style="color:red">Reserved</h2>
+                                                @endif
                                             </div>
                                         </div></a>
                                 </div>

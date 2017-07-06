@@ -44,7 +44,7 @@ $(document).ready(function(){
                     <li class="active">Shopping Cart</li>
                 </ol>
             </div>
-            <div align="center">  <img src="{{asset('theme/images/cart/empty-cart.png')}}"/></div>
+            <div align="center">  <img src="{{asset('images/cart/empty-cart.png')}}"/></div>
 
         </div>
     </section> <!--/#cart_items-->
@@ -82,7 +82,7 @@ $(document).ready(function(){
                             <td class="image">Item</td>
                             <td class="description"></td>
                             <td class="price">Price</td>
-                            <td class="quantity">Quantity</td>
+                            <td class="quantity">Amount of days</td>
                             <td class="total">Total</td>
                             <td></td>
                         </tr>
@@ -95,7 +95,7 @@ $(document).ready(function(){
 
                         <tr>
                             <td class="cart_product">
-                                <a href="{{url('/product_details')}}/{{$cartItem->id}}"><img src="{{$cartItem->options->img}}" alt="" width="200px"></a>
+                                <a href="{{url('/product_details')}}/{{$cartItem->id}}"><img src="/upload/images/{{$cartItem->options->img}}" alt="" width="100px"></a>
                             </td>
                             <td class="cart_description">
                                 <h4><a href="{{url('/product_details')}}/{{$cartItem->id}}" style="color:blue">{{$cartItem->name}}</a></h4>
@@ -112,7 +112,7 @@ $(document).ready(function(){
                                     <input type="hidden" id="proId<?php echo $count;?>" value="{{$cartItem->id}}"/>
 
                                     <input type="number" size="2" value="{{$cartItem->qty}}" name="qty" id="upCart<?php echo $count;?>"
-                                           autocomplete="off" style="text-align:center; max-width:50px; "  MIN="1" MAX="30">
+                                           autocomplete="off" style="text-align:center; max-width:50px; "  MIN="1" MAX="90">
 
 
                                 </div>
@@ -200,7 +200,7 @@ $(document).ready(function(){
                     <div class="total_area">
                         <ul>
                             <li>Cart Sub Total <span>${{Cart::subtotal()}}</span></li>
-                            <li>Eco Tax <span>${{Cart::tax()}}</span></li>
+                           {{-- <li>Eco Tax <span>${{Cart::tax()}}</span></li>--}}
                             <li>Shipping Cost <span>Free</span></li>
                             <li>Total <span>${{Cart::total()}}</span></li>
                         </ul>

@@ -19,7 +19,7 @@
 
                     <input type="text" class="form-control" value="{{$product->pro_name}}" readonly="readonly">
                     <br/>
-                    <img src="{{url('/')}}/upload/images/medium/<?php echo $product->pro_img; ?>" alt="" width="150px" height="150px"/>
+                    <img src="/upload/images/<?php echo $product->pro_img; ?>" alt="" width="150px" height="150px"/>
 
                     <br/>
                     Select Image:

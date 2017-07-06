@@ -16,11 +16,11 @@ class CraeteAddressTable extends Migration
         Schema::create('address', function (Blueprint $table) {
        $table->increments('id');
         $table->string('fullname');
-        $table->string('state');
-        $table->string('city');
-        $table->string('country');
-        $table->string('pincode');
-     
+        $table->string('address');
+            $table->date('birth');
+        $table->string('passport_n');
+        $table->string('identification_n');
+            $table->integer('user_id');
         $table->timestamps();
           });
     }

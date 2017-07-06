@@ -1,7 +1,7 @@
 
 <input type="hidden" name="cmd" value="_cart">
 <input type="hidden" name="upload" value="1">
-<input type="hidden" name="business" value="hardeephp@yahoo.com">
+<input type="hidden" name="business" value="musicRent@gmail.com">
 
 <?php $count =0;?>
    @foreach($cartItems as $cartItem)
@@ -9,10 +9,11 @@
    <input type="hidden" name="item_name_{{$count}}" value="{{$cartItem->name}}">
 <input type="hidden" name="item_number_{{$count}}" value="{{$cartItem->id}}">
 <input type="hidden" name="quantity_{{$count}}" value="{{$cartItem->qty}}">
+   <input type="hidden" name="quantity__days_{{$count}}" value="{{$cartItem->qty_days}}">
 <input type="hidden" name="amount_{{$count}}" value="{{$cartItem->price}}">
-<input type="hidden" name="shipping_{{$count}}" value="0.30">
+<input type="hidden" name="shipping_{{$count}}" value="0.00">
 
-<input type="hidden" name="tax_{{$count}}" value="0.12">
+<input type="hidden" name="tax_{{$count}}" value="0.00">
 
 <!-- after payment -->
  <input type="hidden" name="return" id="return" value="http://localhost/easyshop/index.php/thankyou" />

@@ -12,22 +12,29 @@
                 </div>
                 <div class="mainmenu pull-left">
 
+
                     <ul class="nav navbar-nav collapse navbar-collapse">
                         <li><a href="{{url('/')}}" class="active">Home</a></li>
-                        <li class="dropdown"><a href="#">Shop<i class="fa fa-angle-down"></i></a>
+                        <li class="dropdown"><a href="{{url('/products')}}">Rental Products<i class="fa fa-angle-down"></i></a>
                             <ul role="menu" class="sub-menu">
-                             <?php  $cats = DB::table('pro_cat')->get(); ?>
-                              @foreach($cats as $cat)
-                              <li><a href="{{url('/')}}/products/{{$cat->name}}">{{ucwords($cat->name)}}</a></li>
-                              @endforeach
-                                <?php /*<li><a href="{{url('/products/books')}}">Books</a></li>
-                                <li><a href="{{url('/products/electronics')}}">Electronics</a></li>
-                                <li><a href="{{url('/products/automobiles')}}">Automobiles</a></li>
-                                <li><a href="{{url('/products/movies')}}">Movies</a></li>
-                                 *
-                                 */?>
+                                <div class="row">
+                                <div class="col-md-4"><li><h2 style="color: #FFFFFF">Category</h2></li>
+                                    <?php  $cats = DB::table('pro_cat')->get(); ?>
+                                    @foreach($cats as $cat)
+                                        <li><a href="{{url('/')}}/products/{{$cat->name}}">{{ucwords($cat->name)}}</a></li>
+                                    @endforeach
+                                    </div>
+                                <div class="col-md-4"><li><h2 style="color: #FFFFFF">Brand</h2></li>
+                                    <?php  $brands = DB::table('pro_brand')->get(); ?>
+                                    @foreach($brands as $brand)
+                                        <li><a href="{{url('/')}}/products/brand/{{$brand->name}}">{{ucwords($brand->name)}}</a></li>
+                                    @endforeach
+                                </div>
+                                    </div>
 
-                            </ul>
+
+                                </ul>
+
                         </li>
 
                         <?php /* <li class="dropdown"><a href="#">Blog<i class="fa fa-angle-down"></i></a>

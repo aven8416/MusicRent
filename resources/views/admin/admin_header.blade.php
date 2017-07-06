@@ -5,7 +5,7 @@
 			</div>
 
 			<!--logo start-->
-			<a href="{{url('/admin')}}" class="logo">Easy<span class="lite">Shop</span></a>
+			<a href="{{url('/admin')}}" class="logo">Music<span class="lite">Rent</span></a>
 			<!--logo end-->
 
 			<div class="nav search-row" id="top_menu">

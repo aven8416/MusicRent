@@ -8,9 +8,8 @@
 
 body {
   font-family: 'Roboto', sans-serif;
-  background:;
   position: relative;
-  font-weight:400px;
+  font-weight: 400;
 }
 
 ul li {
@@ -294,7 +293,7 @@ ul.sub-menu {
 	list-style: none;
 	padding: 0;
 	margin: 0;
-	width: 220px;
+	width: 500px;
 	-webkit-box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);
 	box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);
 	display: none;
@@ -783,7 +782,7 @@ h2.title:before{
 }
 
 .shipping {
-  background-color: #F2F2F2;
+  background-color: rgba(138, 120, 104, 0.87);
   margin-top: 40px;
   overflow: hidden;
   padding-top: 20px;

@@ -23,7 +23,7 @@
                   <tr>
                     <td>{{$img->id}}</td>
                     <td>{{$img->proId}}</td>
-                  <td><img src="{{Config::get('app.url')}}/public/img/alt_images/{{$img->alt_img}}"
+                  <td><img src="upload/images/{{$img->alt_img}}"
                     style="width:50px; height:50px"/></td>
                     <td>{{$img->status}}</td>
                   </tr>

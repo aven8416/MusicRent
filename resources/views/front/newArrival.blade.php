@@ -33,7 +33,7 @@
 
                     <div class="brands_products"><!--brands_products-->
                         <div class="brands-name">
-                              <h2>Brands</h2>
+                              <h2>Category</h2>
                                 <ul class="nav nav-pills nav-stacked">
 
                                     <?php $cats = DB::table('pro_cat')->orderby('name', 'ASC')->get();?>
@@ -55,8 +55,33 @@
                         </div>
                     </div><!--/brands_products-->
 
+
+                    <div class="brands_products"><!--brands_products-->
+                        <div class="brands-name">
+                            <h2>Category</h2>
+                            <ul class="nav nav-pills nav-stacked">
+
+                                <?php $cats = DB::table('pro_brand')->orderby('name', 'ASC')->get();?>
+
+                                @foreach($brands as $brand)
+                                    <li class="brandLi"><input type="checkbox" id="brandId" value="{{$brand->id}}" class="try"/>
+                                        <span class="pull-right">({{App\products::where('brand_id',$brand->id)->count()}})</span>
+                                        <b>  {{ucwords($brand->name)}}</b></li>
+                                @endforeach
+                                <?php /*   <li><a href=""> <span class="pull-right">(56)</span>Grüne Erde</a></li>
+                                    <li><a href=""> <span class="pull-right">(27)</span>Albiro</a></li>
+                                    <li><a href=""> <span class="pull-right">(32)</span>Ronhill</a></li>
+                                    <li><a href=""> <span class="pull-right">(5)</span>Oddmolly</a></li>
+                                    <li><a href=""> <span class="pull-right">(9)</span>Boudestijn</a></li>
+                                    <li><a href=""> <span class="pull-right">(4)</span>Rösch creative culture</a></li>
+                                  * */?>
+
+                            </ul>
+                        </div>
+                    </div><!--/brands_products-->
+
                     <div class="shipping text-center"><!--shipping-->
-                        <img src="{{url('../')}}/theme/images/home/shipping.jpg" alt="" />
+                        <img src="{{url('../')}}/images/home/shipping.jpg" alt="" />
                     </div><!--/shipping-->
 
                 </div>
@@ -82,14 +107,14 @@
                                 <div class="single-products">
                                     <div class="productinfo text-center">
                                         <a href="{{url('/product_details')}}">
-                                            <img src="<?php echo $product->pro_img; ?>" alt="" />
+                                            <img src="/upload/images/<?php echo $product->pro_img; ?>" alt="" />
                                         </a>
 
                                         <h2 id="price">
                                           @if($product->spl_price==0)
                                           ${{$product->pro_price}}
                                           @else
-                                          <img src="{{Config::get('app.url')}}theme/images/shop/sale.png" style="width:60px"/>
+                                          <img src="client/images/shop/sale.png" style="width:60px"/>
                                         <span style="text-decoration:line-through; color:#ddd">
                                            ${{$product->pro_price}} </span>
                                            ${{$product->spl_price}}
@@ -107,7 +132,7 @@
                                                   @if($product->spl_price==0)
                                                   ${{$product->pro_price}}
                                                   @else
-                                                <img src="{{Config::get('app.url')}}theme/images/shop/sale.png" style="width:60px"/>
+                                                <img src="{{Config::get('app.url')}}client/images/shop/sale.png" style="width:60px"/>
                                                 <span style="text-decoration:line-through; color:#ddd">
                                                    ${{$product->pro_price}} </span>
                                                    ${{$product->spl_price}}

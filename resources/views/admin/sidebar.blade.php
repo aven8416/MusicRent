@@ -65,6 +65,32 @@
 
                         </ul>
                     </li>
+                    <li class="sub-menu">
+                        <a href="javascript:;" class="">
+                            <i class="fa fa-th-large"></i>
+                            <span>Brands</span>
+                            <span class="menu-arrow arrow_carrot-right"></span>
+                        </a>
+                        <ul class="sub">
+                            <li><a class="" href="{{url('/admin/addBrand')}}">Add Brand</a></li>
+
+                            <li><a class="" href="{{url('/admin/brands')}}">View Brands</a></li>
+
+                        </ul>
+                    </li>
+                    <li class="sub-menu">
+                        <a href="javascript:;" class="">
+                            <i class="fa fa-calendar"></i>
+                            <span>Orders</span>
+                            <span class="menu-arrow arrow_carrot-right"></span>
+                        </a>
+                        <ul class="sub">
+                            <li><a class="" href="{{url('/admin/orders')}}">View Orders</a></li>
+                            <li><a class="" href="{{url('/admin/orders/confirmed')}}">View confirmed Orders</a></li>
+                            <li><a class="" href="{{url('/admin/orders/canceled')}}">View canceled Orders</a></li>
+                            <li><a class="" href="{{url('/admin/orders/pending')}}">View pending Orders</a></li>
+                        </ul>
+                    </li>
 
 
                 </ul>

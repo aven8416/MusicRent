@@ -26,8 +26,6 @@
                     <thead>
                         <tr>
                             <th>Date</th>
-                            <th>Product name</th>
-                            <th>Product Code</th>
                             <th>Order Total</th>
                             <th>Order Status</th>
 
@@ -40,11 +38,9 @@
                         @foreach($orders as $order)
                         <tr>
                             <td>{{$order->created_at}}</td>
-                            <td>{{ucwords($order->pro_name)}}</td>
-                            <td>{{$order->pro_code}}</td>
                             <td>{{$order->total}}</td>
                             <td>{{$order->status}}</td>
-                            <td>View</td>
+                            <td><a href="{{url('/')}}/orders/orderDetails/{{$order->id}}">View</a></td>
                         </tr>
                         @endforeach
                     </tbody>

@@ -1,8 +1,8 @@
 <?php
 $products1 = DB::table('recommends')
         ->leftJoin('products','recommends.pro_id','products.id')
-        ->select('pro_id','pro_name','pro_img','pro_price', DB::raw('count(*) as total'))
-        ->groupBy('pro_id','pro_name','pro_img','pro_price')
+        ->select('pro_id','pro_name','pro_img','pro_price', 'brand_id','stock', DB::raw('count(*) as total'))
+        ->groupBy('pro_id','pro_name','pro_img','pro_price','brand_id' ,'stock')
         ->orderby('total','DESC')
         ->take(3)
         ->get();
@@ -30,10 +30,17 @@ if(Auth::check()){
                                                 <div class="single-products">
                                                     <div class="productinfo text-center">
                                                        <a href="{{url('/product_details')}}/{{$p->pro_id}}"> 
-                                                           <img src="{{$p->pro_img}}" alt="" /></a>
-                                                        <h2>${{$p->pro_price}}</h2>
-                                                        <p>  <a href="{{url('/product_details')}}/{{$p->pro_id}}">{{$p->pro_name}}</a></p>
-                                                        <a href="{{url('/cart/addItem')}}/{{$p->pro_id}}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                           <img src="/upload/images/{{$p->pro_img}}" alt="" /></a>
+                                                        <h2>${{$p->pro_price}}<span style="font-size: 14px; color:#696763">/day</span></h2>
+                                                        <?php $brand = DB::table('pro_brand')->where('id',$p->brand_id)->get()->first();?>
+                                                        <p>  <a href="{{url('/product_details')}}/{{$p->pro_id}}">{{$brand->name}} {{$p->pro_name}}</a></p>
+                                                        @if($p->stock == 1)
+                                                            <a href="{{url('/cart/addItem')}}/{{$p->pro_id}}" class="btn btn-default add-to-cart">
+                                                                <i class="fa fa-shopping-cart"></i>
+                                                                Add to cart</a>
+                                                        @else
+                                                            <h2 style="color:red">Reserved</h2>
+                                                        @endif
                                                     </div>
 
                                                 </div>
@@ -48,12 +55,19 @@ if(Auth::check()){
                                                 <div class="single-products">
                                                     <div class="productinfo text-center">
                                                         <a href="{{url('/product_details')}}/{{$p->pro_id}}"> 
-                                                            <img src="{{$p->pro_img}}" alt="" /></a>
-                                                        <h2>${{$p->pro_price}}</h2>
-                                                        <p>  <a href="{{url('/product_details')}}/{{$p->pro_id}}">{{$p->pro_name}}</a></p>
-                                                        <a href="{{url('/cart/addItem')}}/{{$p->pro_id}}" class="btn btn-default add-to-cart">
-                                                            <i class="fa fa-shopping-cart"></i>
-                                                            Add to cart</a>
+                                                            <img src="/upload/images/{{$p->pro_img}}" alt="" /></a>
+                                                        <h2>${{$p->pro_price}}<span style="font-size: 14px; color:#696763">/day</span></h2>
+                                                        <?php $brand = DB::table('pro_brand')->where('id',$p->brand_id)->get()->first();?>
+                                                        <p>  <a href="{{url('/product_details')}}/{{$p->pro_id}}">{{$brand->name}} {{$p->pro_name}}</a></p>
+
+                                                        @if($p->stock == 1)
+                                                            <a href="{{url('/cart/addItem')}}/{{$p->pro_id}}" class="btn btn-default add-to-cart">
+                                                                <i class="fa fa-shopping-cart"></i>
+                                                                Add to cart</a>
+                                                        @else
+                                                            <h2 style="color:red">Reserved</h2>
+                                                        @endif
+
                                                     </div>
 
                                                 </div>

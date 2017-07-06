@@ -13,5 +13,10 @@ class products extends Model {
         return $this->belongsToMany('Category', 'pro_cat');
     }
 
+    public function brands() {
+
+        return $this->belongsToMany('Brand', 'pro_brand');
+    }
+
 
 }

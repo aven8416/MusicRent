@@ -18,7 +18,8 @@
 
 
 
-        <?php // form start here?>
+
+
         <form action="{{url('/')}}/formvalidate" method="post">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <div class="shopper-informations">
@@ -27,41 +28,131 @@
                         <div class="shopper-info">
                             <p>Shopper Information</p>
 
-                            <input type="text" name="fullname"  placeholder="Display Name" class="form-control"  value="{{ old('fullname') }}">
+                            @if(count($address_data)==0)
+                                <label>Your Name</label>
+                                <input type="text" name="fullname"  placeholder="Your Name" class="form-control"  >
 
-                            <span style="color:red">{{ $errors->first('fullname') }}</span>
-                            <hr>
+                                <span style="color:red">{{ $errors->first('fullname') }}</span>
+                                <hr>
 
-                            <input type="text" placeholder="State Name" name="state" class="form-control" value="{{ old('state') }}">
+                                <label>Your city</label>
+                                <select name="city" class="form-control" >
+                                <option value="" selected="selected">Select city</option>
+                                <option value="Minsk">Minsk</option>
+                                <option value="Gomel">Gomel</option>
+                                <option value="Vitebsk">Vitebsk</option>
+                                <option value="Brest">Brest</option>
+                                <option value="Mogilev">Mogilev</option>
+                                <option value="Grodno">Grodno</option>
+                                </select>
 
-                            <span style="color:red">{{ $errors->first('state') }}</span>
+                                <span style="color:red">{{ $errors->first('city') }}</span>
+                                <hr>
 
-                            <hr>
-                            <input type="text" placeholder="Pincode" name="pincode" class="form-control" value="{{ old('pincode') }}">
+                                <label>Your address</label>
+                                <input type="text" name="address"  placeholder="Your address" class="form-control" >
 
-                            <span style="color:red">{{ $errors->first('pincode') }}</span>
+                                <span style="color:red">{{ $errors->first('address') }}</span>
+                                <hr>
 
-                            <hr>
-                            <input type="text" placeholder="City Name" name="city" class="form-control" value="{{ old('city') }}">
+                                <label>Your phone</label>
+                                <input type="tel" name="phone"  placeholder="Your phone" class="form-control" >
 
-                            <span style="color:red">{{ $errors->first('city') }}</span>
+                                <span style="color:red">{{ $errors->first('phone') }}</span>
+                                <hr>
+                                <label>Birth of Date</label>
+                                <input type="date" name="birth"  placeholder="Birth of Date" class="form-control"  >
+                                <span style="color:red">{{ $errors->first('birth') }}</span>
+                                <hr>
 
-                            <hr>
+                                {{--    <!-- Drop-off date/time start -->
+                                     <div class="datetime drop-off">
+                                         <div class="date pull-left">
+                                             <div class="input-group">
+                                                 <span class="input-group-addon pixelfix"><span class="glyphicon glyphicon-calendar"></span> Date of Birth</span>
+                                                 <input type="text" name="birth" id="birth" value="{{ Carbon\Carbon::parse($value->birth)->format('d-m-Y i') }}" class="form-control datepicker" placeholder="dd/mm/yyyy">
+                                                 <span style="color:red">{{ $errors->first('birth') }}</span>
+                                             </div>
+                                         </div>
+                                         <div class="clearfix"></div>
+                                     </div>
+                                     <!-- Drop-off date/time end -->
+                                     <hr>--}}
+                                <label>Passport Number</label>
+                              <input type="text" placeholder="Passport Number" name="passport_n" class="form-control" >
 
-                            <select name="country" class="form-control" >
-                                <option value="{{ old('country') }}" selected="selected">Select country</option>
-                                <option value="United States">United States</option>
-                                <option value="Bangladesh">Bangladesh</option>
-                                <option value="UK">UK</option>
-                                <option value="India">India</option>
-                                <option value="Pakistan">Pakistan</option>
-                                <option value="Ucrane">Ucrane</option>
-                                <option value="Canada">Canada</option>
-                                <option value="Dubai">Dubai</option>
-                            </select>
-                            <span style="color:red">{{ $errors->first('country') }}</span>
+                                <span style="color:red">{{ $errors->first('passport_n') }}</span>
 
+                                <hr>
+                                <label>Identification Number</label>
+                                <input type="text" placeholder="Identification Number" name="identification_n" class="form-control" >
 
+                                <span style="color:red">{{ $errors->first('identification_n') }}</span>
+
+                            @else
+                                @foreach($address_data as $value)
+                                    <label>Your Name</label>
+                                    <input type="text" name="fullname"  placeholder="Your Name" class="form-control"  value="{{ $value->fullname}}">
+
+                                    <span style="color:red">{{ $errors->first('fullname') }}</span>
+                                    <hr>
+                                    <label>Your city</label>
+                                    <select name="city" class="form-control" >
+                                        <option value="{{$value->city}}" selected="selected">{{$value->city}}</option>
+                                        <option value="Minsk">Minsk</option>
+                                        <option value="Gomel">Gomel</option>
+                                        <option value="Vitebsk">Vitebsk</option>
+                                        <option value="Brest">Brest</option>
+                                        <option value="Mogilev">Mogilev</option>
+                                        <option value="Grodno">Grodno</option>
+                                    </select>
+                                    <span style="color:red">{{ $errors->first('city') }}</span>
+
+                                    <hr>
+                                    <label>Your address</label>
+                                    <input type="text" name="address"  placeholder="Your address" class="form-control"  value="{{ $value->address }}">
+
+                                    <span style="color:red">{{ $errors->first('address') }}</span>
+                                    <hr>
+                                    <label>Your phone</label>
+                                    <input type="text" name="phone"  placeholder="Your phone" class="form-control"  value="{{ $value->phone }}">
+
+                                    <span style="color:red">{{ $errors->first('phone') }}</span>
+                                    <hr>
+                                        <label>Birth of Date</label>
+                                    <input type="date" name="birth"  placeholder="Birth of Date" class="form-control"  value="{{$value->birth}}">
+
+                                    <span style="color:red">{{ $errors->first('birth') }}</span>
+                                    <hr>
+
+                                    {{--    <!-- Drop-off date/time start -->
+                                         <div class="datetime drop-off">
+                                             <div class="date pull-left">
+                                                 <div class="input-group">
+                                                     <span class="input-group-addon pixelfix"><span class="glyphicon glyphicon-calendar"></span> Date of Birth</span>
+                                                     <input type="text" name="birth" id="birth" value="{{ Carbon\Carbon::parse($value->birth)->format('d-m-Y i') }}" class="form-control datepicker" placeholder="dd/mm/yyyy">
+                                                     <span style="color:red">{{ $errors->first('birth') }}</span>
+                                                 </div>
+                                             </div>
+                                             <div class="clearfix"></div>
+                                         </div>
+                                         <!-- Drop-off date/time end -->
+                                         <hr>--}}
+                                            <label>Passport Number</label>
+                                    <input type="text" placeholder="Passport Number" name="passport_n" class="form-control" value="{{ $value->passport_n }}">
+
+                                    <span style="color:red">{{ $errors->first('passport_n') }}</span>
+
+                                    <hr>
+                                                <label>Identification Number</label>
+                                    <input type="text" placeholder="Identification Number" name="identification_n" class="form-control" value="{{ $value->identification_n}}">
+
+                                    <span style="color:red">{{ $errors->first('identification_n') }}</span>
+
+                                    <hr>
+
+                                @endforeach
+                            @endif
 
 
                         </div>
@@ -77,10 +168,9 @@
                 </div>
             </div>
 
-        <?php // form end here?>
 
         <div class="review-payment">
-            <h2>Review & Payment</h2>
+            <h2>Review</h2>
         </div>
 
         <div class="table-responsive cart_info">
@@ -90,7 +180,7 @@
                         <td class="image">Item</td>
                         <td class="description"></td>
                         <td class="price">Price</td>
-                        <td class="quantity">Quantity</td>
+                        <td class="quantity">Amount of days</td>
                         <td class="total">Total</td>
                         <td></td>
                     </tr>
@@ -99,7 +189,7 @@
                     @foreach($cartItems as $cartItem)
                     <tr>
                         <td class="cart_product">
-                            <a href=""><img src="images/cart/one.png" alt=""></a>
+                            <a href=""><img src="/upload/images/{{$cartItem->options->img}}" alt="" width="100px"></a>
                         </td>
                         <td class="cart_description">
                             <h4><a href="">{{$cartItem->name}}</a></h4>
@@ -132,10 +222,10 @@
                                     <td>Cart Sub Total</td>
                                     <td>${{Cart::subtotal()}}</td>
                                 </tr>
-                                <tr>
+                               {{-- <tr>
                                     <td> Tax</td>
                                     <td>${{Cart::tax()}}</td>
-                                </tr>
+                                </tr>--}}
                                 <tr class="shipping-cost">
                                     <td>Shipping Cost</td>
                                     <td>Free</td>
@@ -152,19 +242,10 @@
             </table>
         </div>
         <div class="payment-options">
-            <span>
-                <input type="radio" name="pay" value="COD" checked="checked" id="cash"> COD
-
+        <span>
+            <input type="submit" value="Submit" class="btn btn-primary" id="cashbtn">
             </span>
-            <span>
-                <input type="radio" name="pay" value="paypal" id="paypal"> PayPal
-                @include('front.paypal')
-            </span>
-
-            <span>
-            <input type="submit" value="COD" class="btn btn-primary" id="cashbtn">
-            </span>
-        </div>
+    </div>
     </div>
 
       </form>
@@ -172,24 +253,6 @@
 
 
 
-
-        <script>
-
-            $('#paypalbtn').hide();
-          //  $('#cashbtn').hide();
-
-            $(':radio[id=paypal]').change(function(){
-                $('#paypalbtn').show();
-                $('#cashbtn').hide();
-
-            });
-
-              $(':radio[id=cash]').change(function(){
-                $('#paypalbtn').hide();
-                $('#cashbtn').show();
-
-            });
-            </script>
 </section> <!--/#cart_items-->
 
 

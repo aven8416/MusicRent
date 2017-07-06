@@ -33,13 +33,13 @@
 
                     <div class="brands_products"><!--brands_products-->
                         <div class="brands-name">
-                              <h2>Brands</h2>
+                              <h2>Category</h2>
                                 <ul class="nav nav-pills nav-stacked">
 
                                     <?php $cats = DB::table('pro_cat')->orderby('name', 'ASC')->get();?>
 
                                     @foreach($cats as $cat)
-                                    <li class="brandLi"><input type="checkbox" id="brandId" value="{{$cat->id}}" class="try"/>
+                                    <li class="brandLi"><input type="checkbox" id="brandId" value="{{$cat->id}}" class="tryCat"/>
                                  <span class="pull-right">({{App\products::where('cat_id',$cat->id)->count()}})</span>
                                   <b>  {{ucwords($cat->name)}}</b></li>
                                    @endforeach
@@ -55,8 +55,34 @@
                         </div>
                     </div><!--/brands_products-->
 
+
+                    <div class="brands_products"><!--brands_products-->
+                        <div class="brands-name">
+                            <h2>Brand</h2>
+                            <ul class="nav nav-pills nav-stacked">
+
+                                <?php $brands = DB::table('pro_brand')->orderby('name', 'ASC')->get();?>
+
+                                @foreach($brands as $brand)
+                                    <li class="brandLi"><input type="checkbox" id="brandId" value="{{$brand->id}}" class="try"/>
+                                        <span class="pull-right">({{App\products::where('brand_id',$brand->id)->count()}})</span>
+                                        <b>  {{ucwords($brand->name)}}</b></li>
+                                @endforeach
+                                <?php /*   <li><a href=""> <span class="pull-right">(56)</span>Grüne Erde</a></li>
+                                    <li><a href=""> <span class="pull-right">(27)</span>Albiro</a></li>
+                                    <li><a href=""> <span class="pull-right">(32)</span>Ronhill</a></li>
+                                    <li><a href=""> <span class="pull-right">(5)</span>Oddmolly</a></li>
+                                    <li><a href=""> <span class="pull-right">(9)</span>Boudestijn</a></li>
+                                    <li><a href=""> <span class="pull-right">(4)</span>Rösch creative culture</a></li>
+                                  * */?>
+
+                            </ul>
+                        </div>
+                    </div><!--/brands_products-->
+
+
                     <div class="shipping text-center"><!--shipping-->
-                        <img src="{{url('../')}}/theme/images/home/shipping.jpg" alt="" />
+                        <img src="{{url('../')}}/images/home/shipping.jpg" alt="" />
                     </div><!--/shipping-->
 
                 </div>
@@ -82,23 +108,26 @@
                                 <div class="single-products">
                                     <div class="productinfo text-center">
                                         <a href="{{url('/product_details')}}">
-                                            <img src="<?php echo $product->pro_img; ?>" alt="" />
+                                            <img src="/upload/images/<?php echo $product->pro_img; ?>" alt="" />
                                         </a>
 
                                         <h2 id="price">
                                           @if($product->spl_price==0)
                                           ${{$product->pro_price}}
                                           @else
-                                          <img src="{{Config::get('app.url')}}theme/images/shop/sale.png" style="width:60px"/>
                                         <span style="text-decoration:line-through; color:#ddd">
                                            ${{$product->pro_price}} </span>
                                            ${{$product->spl_price}}
-                                          @endif
+                                          @endif<p style="font-size: 14px; color:#696763">per day</p>
 
                                         </h2>
-
-                                        <p><a href="{{url('/product_details')}}"><?php echo $product->pro_name; ?></a></p>
-                                        <a href="{{url('/cart/addItem')}}/<?php echo $product->id; ?>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                        <?php $brand = DB::table('pro_brand')->where('id',$product->brand_id)->get()->first();?>
+                                        <p><a href="{{url('/product_details')}}"><?php echo ucwords($brand->name)?>  <?php echo  $product->pro_name; ?></a></p>
+                                        @if($product->stock == 1)
+                                            <a href="{{url('/cart/addItem')}}/<?php echo $product->id; ?>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                        @else
+                                            <h2 style="color:red">Reserved</h2>
+                                        @endif
                                     </div>
                                     <a href="{{url('/product_details')}}/<?php echo $product->id; ?>">
                                         <div class="product-overlay">
@@ -107,14 +136,20 @@
                                                   @if($product->spl_price==0)
                                                   ${{$product->pro_price}}
                                                   @else
-                                                <img src="{{Config::get('app.url')}}theme/images/shop/sale.png" style="width:60px"/>
+                                                <img src="images/shop/on-sale.png" style="width:60px"/>
                                                 <span style="text-decoration:line-through; color:#ddd">
                                                    ${{$product->pro_price}} </span>
                                                    ${{$product->spl_price}}
                                                   @endif
+                                                      <p style="font-size: 14px; color:#fff">per day</p>
                                                 </h2>
-                                                <p><?php echo $product->pro_name; ?></p>
+                                                <?php $brand = DB::table('pro_brand')->where('id',$product->brand_id)->get()->first();?>
+                                                <p><?php echo ucwords($brand->name)?> <?php echo $product->pro_name; ?></p>
+                                                @if($product->stock == 1)
                                                 <a href="{{url('/cart/addItem')}}/<?php echo $product->id; ?>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                   @else
+                                                <h2 style="color:red">Reserved</h2>
+                                                    @endif
                                             </div>
                                         </div></a>
                                 </div>
